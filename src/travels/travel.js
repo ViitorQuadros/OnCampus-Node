@@ -2,7 +2,7 @@
 const {v4: uuidV4} = require("uuid")
 
 // descrição do que precisa para a aplicação....
-// id,idViagem, nameViagem, voltoInViagem,vouInViagem, vouAndVoltoInViagem, destinoViagem
+// id,idViagem, nameViagem, voltoInViagem,vouInViagem, vouAndVoltoInViagem, destinoViagem, turnoViagem
 
 class Travel {
     constructor(idViagem, nameViagem, voltoInViagem, vouInViagem, vouAndVoltoInViagem, destinoViagem ){
