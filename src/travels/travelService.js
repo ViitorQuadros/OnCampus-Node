@@ -11,7 +11,7 @@ class TravelService{
         return this.repository.findAll()
     }
 
-    createTravels({idViagem, nameViagem, voltoInViagem, vouInViagem, vouAndVoltoInViagem, destinoViagem}){
+    createTravels({ idViagem, nameViagem, voltoInViagem, vouInViagem, vouAndVoltoInViagem, destinoViagem}){
         const newTravels = new Travel(idViagem, nameViagem, voltoInViagem, vouInViagem, vouAndVoltoInViagem, destinoViagem)
         
         //Método para fazer a validadação se a viagem já está criada

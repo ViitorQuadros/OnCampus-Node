@@ -6,6 +6,7 @@ const {v4: uuidV4} = require("uuid")
 
 class Travel {
     constructor(idViagem, nameViagem, voltoInViagem, vouInViagem, vouAndVoltoInViagem, destinoViagem ){
+        //this.id = uuidV4()
         this.idViagem = idViagem
         this.nameViagem = nameViagem
         this.voltoInViagem = voltoInViagem
