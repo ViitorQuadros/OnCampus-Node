@@ -19,20 +19,38 @@ const userRepository = new UserRepository();
 const authService = new AuthService(userRepository);
 const authController = new AuthController(authService);
 
+
+const validadorDeOpcaoAutenticacao = {
+     //PreHandler: Faz a verificação do Token do usuário.
+     preHandler: (request,reply, done) =>{
+        //Bearer == Token do usuário.
+        const token = request.headers.authorization?.replace(/^Bearer /, "");
+        if(!token) reply.code(401).send({message: "Não autorizado!!   DEBUG: Faltando Token"})
+        
+        const user = authService.verificaToken(token);
+        if(!user) reply.code(404).send({message: "Não autorizado!! Token Inválido"})
+            request.user = user;
+
+        done();
+    }
+
+
+}
+
 // Método que faz apenas um teste se a aplicação está rodando na porta certa
 app.get("/hello", (request, reply) => {
     reply.send({ message: "Aplicação rodando Corretamente!!  :" });
 });
 
 // Método no qual lista todas as viagens cadastradas
-app.get("/api/travels", (request, reply) => {
+app.get("/api/travels",validadorDeOpcaoAutenticacao, (request, reply) => {
 
     const {code , body} = travelController.index(request)
     reply.code(code).send(body)
 });
 
 // Método no qual faz a criação da viagens
-app.post("/api/travels", (request, reply) => {
+app.post("/api/travels",validadorDeOpcaoAutenticacao, (request, reply) => {
    const {code, body} = travelController.save(request)
    reply.code(code).send(body)
 });
@@ -40,6 +58,11 @@ app.post("/api/travels", (request, reply) => {
 // Registro de login usuário
 app.post("/api/auth/register", (request, reply) => {
     const {code, body} = authController.register(request);
+    reply.code(code).send(body);
+})
+
+app.post("/api/auth/login", (request,reply) => {
+    const {code, body} = authController.login(request);
     reply.code(code).send(body);
 })
 

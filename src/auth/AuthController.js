@@ -16,6 +16,22 @@ class AuthController{
     }
   }
 
+  login(request){
+    const {email, password} = request.body;
+    if(!email || !password){
+      return { code : 400, body: {message: "email e senha senha são obrigatórios"}}
+    }
+    try {
+      const body = this.service.login(email,password)
+      return { code: 200, body };
+    } catch (error) {
+      return{code: 400, body: {message: error.message}}
+    }
+
+
+  }
+
+
 }
 
 module.exports = AuthController;

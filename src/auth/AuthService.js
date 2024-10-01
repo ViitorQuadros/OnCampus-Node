@@ -22,20 +22,22 @@ this.repository = repository
 
   //Método de Login
   login(email, password){
-    const user = this.repository.findByEmail(email)
+    const user = this.repository.findByEmail(email);
     if(!user) throw new Error("Usuário não encontrado")
 
     const ComparaSenhas = bcrypt.compareSync(password, user.password)
     if(!ComparaSenhas) throw new Error("Senha incorreta!!")
                                                                                
     const token = jwt.sign({id: user.id, email: user.email}, "segredo-do-jwt", {expiresIn:
-      " 30d" })
+      "1d" })
      //ExpiresIn :Válido por quanto tempo*
     return {token,user}
-    
+  }
 
-
-
+  verificaToken(token){
+    const tokenDecodificado = jwt.verify(token, "segredo-do-jwt");
+    const user = this.repository.findByEmail(tokenDecodificado.email);
+    return user;
   }
 
 }
