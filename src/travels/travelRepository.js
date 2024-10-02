@@ -1,19 +1,17 @@
-const Travel = require("./travel")
-
+const Travel = require("./travel");
 
 class TravelRepository {
-    constructor(){
-        this.travels = []
-    }
+	constructor() {
+		this.travels = [];
+	}
 
-    findAll(){
-        return this.travels
-    }
+	findAll() {
+		return this.travels;
+	}
 
-    create(travel){
-        this.travels.push(travel)
-    }
-
+	create(travel) {
+		this.travels.push(travel);
+	}
 }
 
-module.exports = TravelRepository
+module.exports = TravelRepository;
