@@ -5,12 +5,12 @@ class TravelController {
 		this.service = service;
 	}
 
-	index(request) {
-		const travel = this.service.findAllTravels();
+	async index(request) {
+		const travel = await this.service.findAllTravels();
 		return { code: 200, body: { travel } };
 	}
 
-	save(request) {
+	async save(request) {
 		const {
 			idViagem,
 			nameViagem,
@@ -29,8 +29,8 @@ class TravelController {
 				body: { message: "A Viagem não pode ser criada sem um nome!!" },
 			};
 		}
-		const travel = this.service.createTravels({
-			user,
+		const travel = await this.service.createTravels({
+			userId: user.id,
 			idViagem,
 			nameViagem,
 			voltoInViagem,

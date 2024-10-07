@@ -1,17 +1,17 @@
 const Travel = require("./travel");
-const create = require("./travelRepository");
+const create = require("./travelMemoryRepository");
 
 class TravelService {
 	constructor(repository) {
 		this.repository = repository;
 	}
 
-	findAllTravels() {
-		return this.repository.findAll();
+	async findAllTravels() {
+		return await this.repository.findAll();
 	}
 
-	createTravels({
-		user,
+	async createTravels({
+		userId,
 		idViagem,
 		nameViagem,
 		voltoInViagem,
@@ -20,7 +20,7 @@ class TravelService {
 		destinoViagem,
 	}) {
 		const newTravels = new Travel({
-			user,
+			userId,
 			idViagem,
 			nameViagem,
 			voltoInViagem,
@@ -30,7 +30,9 @@ class TravelService {
 		});
 
 		//Método para fazer a validadação se a viagem já está criada
-		const validadorReservaViagens = this.repository.findAll().find((Travel) => {
+		const allTravels = await this.repository.findAll()
+
+		const validadorReservaViagens = allTravels.find((Travel) => {
 			return Travel.idViagem === newTravels.idViagem;
 		});
 
@@ -38,7 +40,7 @@ class TravelService {
 			throw new Error("A viagem com esse ID já está criada.");
 		}
 
-		this.repository.create(newTravels);
+		await this.repository.create(newTravels);
 		return newTravels;
 	}
 }

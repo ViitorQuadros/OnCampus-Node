@@ -1,6 +1,6 @@
 const Travel = require("./travel");
 
-class TravelRepository {
+class TravelMemoryRepository {
 	constructor() {
 		this.travels = [];
 	}
@@ -14,4 +14,4 @@ class TravelRepository {
 	}
 }
 
-module.exports = TravelRepository;
+module.exports = TravelMemoryRepository;
