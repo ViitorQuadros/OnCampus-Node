@@ -33,7 +33,7 @@ const validadorDeOpcaoAutenticacao = {
 		if (!user)
 			reply.code(404).send({ message: "Não autorizado!! Token Inválido" });
 		request.user = user;
-	},
+	}
 };
 
 // Método que faz apenas um teste se a aplicação está rodando na porta certa

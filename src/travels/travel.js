@@ -5,6 +5,7 @@ const { v4: uuidV4 } = require("uuid");
 
 class Travel {
 	constructor({
+		id,
 		userId,
 		idViagem,
 		nameViagem,
@@ -13,7 +14,7 @@ class Travel {
 		vouAndVoltoInViagem,
 		destinoViagem,
 	}) {
-		// precisa ajustar --- this.id = uuidV4()
+		this.id = id ?? uuidV4();
 		this.userId = userId;
 		this.idViagem = idViagem;
 		this.nameViagem = nameViagem;

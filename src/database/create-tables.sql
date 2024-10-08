@@ -8,11 +8,11 @@ CREATE TABLE IF NOT EXISTS Users (
 CREATE TABLE IF NOT EXISTS Travels (
 
   id VARCHAR(36) PRIMARY KEY,
-  viagem_id VARCHAR(36),
   name_viagem VARCHAR(255),
-  volto_in_viagem VARCHAR(3),
-  vou_in_viagem VARCHAR(3),
-  vou_and_volto_viagem VARCHAR(3),
+  volto_in_viagem VARCHAR(255),
+  vou_in_viagem VARCHAR(255),
+  vou_and_volto_viagem VARCHAR(255),
   destinoViagem VARCHAR(255),
-  FOREIGN KEY (viagem_id) REFERENCES Users(id)
+  user_id VARCHAR(36),
+  FOREIGN KEY (user_id) REFERENCES Users(id)
 );

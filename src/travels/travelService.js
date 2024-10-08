@@ -1,5 +1,5 @@
 const Travel = require("./travel");
-const create = require("./travelMemoryRepository");
+const create = require("./travelPostgreRepository");
 
 class TravelService {
 	constructor(repository) {
